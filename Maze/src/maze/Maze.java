@@ -3,10 +3,11 @@ package maze;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class Maze {
 
-	private boolean[][] mazeArray;
+	public boolean[][] mazeArray;
 
 	public enum Direction{
 		up, down, left, right
@@ -17,11 +18,13 @@ public class Maze {
 
 	public int mazeWidth;
 	public int mazeHeight;
+	public String mazeName;
+	ArrayList<String> stringList;
 	
 	public Maze(String fileLoc){
-		ArrayList<String> stringList = generateStringList(fileLoc);
+		generateStringList(fileLoc);
 		if(!stringList.isEmpty())
-			generateMazeArray(stringList);
+			generateMazeArray();
 	}
 	
 	public boolean canMoveLeft(Vertex v){
@@ -46,7 +49,7 @@ public class Maze {
 	
 	private ArrayList<String> generateStringList(String fileLoc){
 		BufferedReader br;
-		ArrayList<String> stringList = new ArrayList<String>(); 
+		stringList = new ArrayList<String>(); 
 		try {
 			br = new BufferedReader (new FileReader(fileLoc) );
 			//Read in text file line by line
@@ -62,7 +65,7 @@ public class Maze {
 		return stringList;
 	}
 
-	private void generateMazeArray(ArrayList<String> stringList){
+	private void generateMazeArray(){
 		//Identify width of maze based on length of first line
 		mazeWidth = stringList.get(0).length();
 		//Identify height of maze based on length of arrayList
@@ -74,7 +77,7 @@ public class Maze {
 		for(int y = 0; y < mazeHeight; y++){
 			String currentLine = stringList.get(y);
 			for(int x = 0; x < mazeWidth; x++){
-				//If current space is '%', mark as not traversable
+				//If current space is '%', mark as not traversible
 				if(currentLine.charAt(x) == '%'){
 					mazeArray[x][y] = false;
 				}
@@ -85,10 +88,30 @@ public class Maze {
 					//If current space is 'G', record goal space
 					if(currentLine.charAt(x) == 'G')
 						goal = new Vertex(x, y);
-					//Mark space as traversable
+					//Mark space as traversible
 					mazeArray[x][y] = true;
 				}
 			}
 		}
 	}
+	
+	public void processSolution(Stack<Vertex> solution){
+		while(!solution.isEmpty()){
+			Vertex currentVertex = solution.pop();
+			int currentX = currentVertex.x;
+			int currentY = currentVertex.y;
+			//If not G or S
+			if (stringList.get(currentY).charAt(currentX) != 'G'
+					&& stringList.get(currentY).charAt(currentX) != 'S') {
+				StringBuilder solutionString = new StringBuilder(stringList.get(currentY));
+				solutionString.setCharAt(currentX, '.');
+				stringList.set(currentY, solutionString.toString());
+			}
+		}
+		for(int i = 0; i < stringList.size(); i++){
+			System.out.println(stringList.get(i));
+		}
+	}
+
+	
 }

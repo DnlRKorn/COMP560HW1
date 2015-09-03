@@ -1,5 +1,6 @@
 package maze;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Stack;
@@ -10,8 +11,10 @@ public class DepthFirstSearch {
 	Stack<Node> frontier;
 	LinkedList<Vertex> exploredSet;
 	Maze m;
+	Stack<Vertex> solution;
 	
 	public DepthFirstSearch(Maze m, Vertex start, Vertex goal){
+		solution = new Stack<Vertex>();
 		startSpace = start;
 		goalSpace = goal;
 		frontier = new Stack<Node>();
@@ -62,11 +65,16 @@ public class DepthFirstSearch {
 		}
 		int counter = 0;
 		while(goalNode!=null){
+			solution.add(goalNode.nodeVertex);
 			System.out.printf("x:%d y:%d\n", goalNode.nodeVertex.x,goalNode.nodeVertex.y);
 			goalNode = goalNode.parent;
 			counter++;
 		}
 		System.out.printf("Number of steps %d\n", counter);
+	}
+	
+	public Stack<Vertex> getSolution(){
+		return solution;
 	}
 	
 	private boolean checkIfInExploredSet(Vertex v){

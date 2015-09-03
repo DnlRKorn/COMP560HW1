@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Stack;
 
 public class AStarSearch {
 	Vertex startSpace;
@@ -11,8 +12,10 @@ public class AStarSearch {
 	Queue<Node> frontier;
 	LinkedList<Vertex> exploredSet;
 	Maze m;
+	Stack<Vertex> solution;
 	
 	public AStarSearch(Maze m, Vertex start, Vertex goal){
+		solution = new Stack<Vertex>();
 		startSpace = start;
 		goalSpace = goal;
 		frontier = new PriorityQueue<Node>(10 , new AStarNodeComparator());
@@ -64,6 +67,7 @@ public class AStarSearch {
 		}
 		int counter = 0;
 		while(goalNode!=null){
+			solution.add(goalNode.nodeVertex);
 			System.out.printf("x:%d y:%d\n", goalNode.nodeVertex.x,goalNode.nodeVertex.y);
 			goalNode = goalNode.parent;
 			counter++;
@@ -71,6 +75,10 @@ public class AStarSearch {
 		System.out.printf("Number of steps %d\n", counter);
 		System.out.printf("Number of nodes expanded %d\n", expandedNodes);
 		
+	}
+	
+	public Stack<Vertex> getSolution(){
+		return solution;
 	}
 	
 	private boolean checkIfInExploredSet(Vertex v){

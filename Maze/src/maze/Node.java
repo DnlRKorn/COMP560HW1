@@ -25,10 +25,6 @@ public class Node {
 		pathCost = c;
 		manhattanDistance = d;
 	}
-	
-//	public Node(Vertex temp, Node n, Direction up, int c, int manhattanDistance2) {
-		// TODO Auto-generated constructor stub
-//	}
 
 	public Vertex expandUp(Vertex v){
 		if(maze.canMoveUp(v)){

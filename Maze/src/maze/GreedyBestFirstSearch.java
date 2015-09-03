@@ -1,9 +1,11 @@
 package maze;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Stack;
 
 public class GreedyBestFirstSearch {
 	Vertex startSpace;
@@ -11,8 +13,10 @@ public class GreedyBestFirstSearch {
 	Queue<Node> frontier;
 	LinkedList<Vertex> exploredSet;
 	Maze m;
+	Stack<Vertex> solution;
 	
 	public GreedyBestFirstSearch(Maze m, Vertex start, Vertex goal){
+		solution = new Stack<Vertex>();
 		startSpace = start;
 		goalSpace = goal;
 		frontier = new PriorityQueue<Node>(10,new GreedyNodeComparator());
@@ -64,12 +68,17 @@ public class GreedyBestFirstSearch {
 		}
 		int counter = 0;
 		while(goalNode!=null){
+			solution.add(goalNode.nodeVertex);
 			System.out.printf("x:%d y:%d\n", goalNode.nodeVertex.x,goalNode.nodeVertex.y);
 			goalNode = goalNode.parent;
 			counter++;
 		}
 		System.out.printf("Number of steps %d\n", counter);
 		System.out.printf("Number of nodes expanded %d\n", expandedNodes);
+	}
+	
+	public Stack<Vertex> getSolution(){
+		return solution;
 	}
 	
 	private boolean checkIfInExploredSet(Vertex v){
