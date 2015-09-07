@@ -12,10 +12,10 @@ public class AStarSearchForCheese {
 	LinkedList<Vertex> exploredSet;
 	LinkedList<Vertex> exploredSetCheese;
 	LinkedList<Vertex> currentCheese;
-	Maze m;
+	CheeseMaze m;
 	
 	
-	public AStarSearchForCheese(Maze m, Vertex start, LinkedList<Vertex> cheese){
+	public AStarSearchForCheese(CheeseMaze m, Vertex start, LinkedList<Vertex> cheese){
 		startSpace = start;
 		currentCheese = (LinkedList<Vertex>) cheese.clone();
 		exploredSet = new LinkedList<Vertex>();
