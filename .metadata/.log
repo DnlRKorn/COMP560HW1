@@ -471,3 +471,16 @@ Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.
 
 !ENTRY org.eclipse.core.net 1 0 2015-09-07 13:58:35.198
 !MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.egit.ui 4 0 2015-09-07 16:59:21.446
+!MESSAGE Cannot pull into a repository with state: MERGING
+!STACK 0
+org.eclipse.jgit.api.errors.WrongRepositoryStateException: Cannot pull into a repository with state: MERGING
+	at org.eclipse.jgit.api.PullCommand.call(PullCommand.java:208)
+	at org.eclipse.egit.core.op.PullOperation$1.run(PullOperation.java:97)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2345)
+	at org.eclipse.egit.core.op.PullOperation.execute(PullOperation.java:128)
+	at org.eclipse.egit.ui.internal.pull.PullOperationUI.execute(PullOperationUI.java:140)
+	at org.eclipse.egit.ui.internal.pull.PullOperationUI$1.runInWorkspace(PullOperationUI.java:115)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:38)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
