@@ -1,32 +1,27 @@
 package maze;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
-import java.util.Queue;
 import java.util.Stack;
 
-public class AStarSearch {
-	Vertex startSpace;
-	Vertex goalSpace;
-	Queue<Node> frontier;
-	LinkedList<Vertex> exploredSet;
-	Maze m;
-	Stack<Vertex> solution;
-	
+public class AStarSearch extends Search{
+
 	public AStarSearch(Maze m, Vertex start, Vertex goal){
+		//Initialize variables
+		maze = m;
 		solution = new Stack<Vertex>();
 		startSpace = start;
 		goalSpace = goal;
+		//Frontier is priority queue in A* Search
 		frontier = new PriorityQueue<Node>(10 , new AStarNodeComparator());
 		frontier.add(new Node(start, null, null, 0, manhattanDistance(start)));
 		exploredSet = new LinkedList<Vertex>();
-		Vertex temp;
 		Node goalNode = null;
 		boolean goalFound = false;
 		int expandedNodes = 0;
+		//Process nodes in the frontier
 		while(!goalFound && !frontier.isEmpty()){
-			Node n = frontier.poll();
+			Node n = ((PriorityQueue<Node>) frontier).poll();
 			expandedNodes++;
 			Vertex v = n.nodeVertex;
 			if(m.isGoalVertex(v)){
@@ -35,64 +30,22 @@ public class AStarSearch {
 			}
 			else{
 				exploredSet.add(v);
-				if(m.canMoveLeft(n.nodeVertex)){
-					temp = new Vertex(v.x-1,v.y);
-					if(!checkIfInExploredSet(temp)){
-						System.out.printf("Adding Vertex (%d,%d)\n",temp.x,temp.y);
-						frontier.add(new Node(temp,n,Maze.Direction.up,n.pathCost+1,manhattanDistance(temp)));
-					}
-				}
-				if(m.canMoveDown(v)){
-					temp = new Vertex(v.x,v.y-1);
-					if(!checkIfInExploredSet(temp)){
-						System.out.printf("Adding Vertex (%d,%d)\n",temp.x,temp.y);
-						frontier.add(new Node(temp,n,Maze.Direction.up,n.pathCost+1,manhattanDistance(temp)));
-					}
-				}
-				if(m.canMoveRight(v)){
-					temp = new Vertex(v.x+1,v.y);
-					if(!checkIfInExploredSet(temp)){
-						System.out.printf("Adding Vertex (%d,%d)\n",temp.x,temp.y);
-						frontier.add(new Node(temp,n,Maze.Direction.up,n.pathCost+1,manhattanDistance(temp)));
-					}
-				}
-				if(m.canMoveUp(v)){
-					temp = new Vertex(v.x,v.y+1);
-					if(!checkIfInExploredSet(temp)){
-						System.out.printf("Adding Vertex (%d,%d)\n",temp.x,temp.y);
-						frontier.add(new Node(temp,n,Maze.Direction.up,n.pathCost+1,manhattanDistance(temp)));
-					}
-				}
+				expandNode(n);
 			}
 		}
-		int counter = 0;
-		while(goalNode!=null){
-			solution.add(goalNode.nodeVertex);
-			System.out.printf("x:%d y:%d\n", goalNode.nodeVertex.x,goalNode.nodeVertex.y);
-			goalNode = goalNode.parent;
-			counter++;
+		int stepCounter = 0;
+		//Retrace parent node pointers to find solution once goal is reached
+		Node currentNode = goalNode;
+		while(currentNode!=null){
+			solution.add(currentNode.nodeVertex);
+			System.out.printf("x:%d y:%d\n", currentNode.nodeVertex.x,currentNode.nodeVertex.y);
+			//Update currentNode to parent node pointer
+			currentNode = currentNode.parent;
+			stepCounter++;
 		}
-		System.out.printf("Number of steps %d\n", counter);
+		System.out.printf("Number of steps %d\n", stepCounter);
 		System.out.printf("Number of nodes expanded %d\n", expandedNodes);
 		
-	}
-	
-	public Stack<Vertex> getSolution(){
-		return solution;
-	}
-	
-	private boolean checkIfInExploredSet(Vertex v){
-		Iterator<Vertex> iter = exploredSet.iterator();
-		while(iter.hasNext()){
-			if(iter.next().equals(v)){
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	private int manhattanDistance(Vertex v){
-		return Math.abs(v.x-goalSpace.x)+Math.abs(v.y-goalSpace.y);
 	}
 
 }

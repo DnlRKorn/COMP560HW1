@@ -7,6 +7,9 @@ import java.util.Stack;
 
 public class Maze {
 
+	//Top-left of maze is coordinate (0, 0)
+	//Entry is 'true' if space is traversible,
+	//'false' if not.
 	public boolean[][] mazeArray;
 
 	public enum Direction{
@@ -26,27 +29,32 @@ public class Maze {
 		if(!stringList.isEmpty())
 			generateMazeArray();
 	}
-	
-	public boolean canMoveLeft(Vertex v){
-		return mazeArray[v.x-1][v.y];
-	}
-	
-	public boolean canMoveRight(Vertex v){
-		return mazeArray[v.x+1][v.y];
-	}
-	
-	public boolean canMoveDown(Vertex v){
-		return mazeArray[v.x][v.y-1];
-	}
-	
-	public boolean canMoveUp(Vertex v){
-		return mazeArray[v.x][v.y+1];
+	//Checks if the vertex in direction d from vertex v is traversible.
+	public boolean canMoveInDirection(Vertex v, Direction d){
+		if(d == Direction.left){
+			return mazeArray[v.x-1][v.y];
+		}
+		else if(d == Direction.right){
+			return mazeArray[v.x+1][v.y];
+		}
+		else if(d == Direction.down){
+			return mazeArray[v.x][v.y+1];
+		}
+		else if(d == Direction.up){
+			return mazeArray[v.x][v.y-1];
+		}
+		//Unknown value of d
+		else
+			return false;	
 	}
 	
 	public boolean isGoalVertex(Vertex v){
 		return v.equals(goal);
 	}
 	
+	/*
+	 * Reads in maze text file and stores as array of Strings.
+	 */
 	private ArrayList<String> generateStringList(String fileLoc){
 		BufferedReader br;
 		stringList = new ArrayList<String>(); 
@@ -94,17 +102,22 @@ public class Maze {
 			}
 		}
 	}
-	
-	public void processSolution(Stack<Vertex> solution){
+	/*
+	 * Goes through solution path and 
+	 * changes spaces traversed to '.'
+	 */
+	public void processSolution(Stack<Vertex> solution){ 
 		while(!solution.isEmpty()){
 			Vertex currentVertex = solution.pop();
 			int currentX = currentVertex.x;
 			int currentY = currentVertex.y;
-			//If not G or S
+			//If not G or S space
 			if (stringList.get(currentY).charAt(currentX) != 'G'
 					&& stringList.get(currentY).charAt(currentX) != 'S') {
+				//Recreate entry at currentY in stringList, replacing traversed space with '.'
+				//Uses StringBuilder due to Java Strings being immutable
 				StringBuilder solutionString = new StringBuilder(stringList.get(currentY));
-				solutionString.setCharAt(currentX, '.');
+				solutionString.setCharAt(currentX, '.'); 
 				stringList.set(currentY, solutionString.toString());
 			}
 		}

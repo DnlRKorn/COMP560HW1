@@ -1,31 +1,25 @@
 package maze;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Stack;
 
-public class DepthFirstSearch {
-	Vertex startSpace;
-	Vertex goalSpace;
-	Stack<Node> frontier;
-	LinkedList<Vertex> exploredSet;
-	Maze m;
-	Stack<Vertex> solution;
-	
+public class DepthFirstSearch extends Search{
+
 	public DepthFirstSearch(Maze m, Vertex start, Vertex goal){
+		//Initialize variables
+		maze = m;
 		solution = new Stack<Vertex>();
 		startSpace = start;
 		goalSpace = goal;
+		//Frontier is stack in Depth-first Search
 		frontier = new Stack<Node>();
 		exploredSet = new LinkedList<Vertex>();
-		frontier.push(new Node(start, null, null, 0));
-		Vertex temp;
+		((Stack<Node>) frontier).push(new Node(start, null, null, 0));
 		Node goalNode = null;
 		boolean goalFound = false;
-		
+		//Process nodes in the frontier
 		while(!(frontier.isEmpty()||goalFound)){
-			Node n = frontier.pop();
+			Node n = ((Stack<Node>) frontier).pop();
 			Vertex v = n.nodeVertex;
 			if(m.isGoalVertex(v)){
 				goalFound = true;
@@ -33,57 +27,20 @@ public class DepthFirstSearch {
 			}
 			else{
 				exploredSet.add(v);
-				if(m.canMoveLeft(n.nodeVertex)){
-					temp = new Vertex(v.x-1,v.y);
-					if(!checkIfInExploredSet(temp)){
-						System.out.printf("Adding Vertex (%d,%d)\n",temp.x,temp.y);
-						frontier.push(new Node(temp,n,Maze.Direction.left,n.pathCost+1));
-					}
-				}
-				if(m.canMoveDown(v)){
-					temp = new Vertex(v.x,v.y-1);
-					if(!checkIfInExploredSet(temp)){
-						System.out.printf("Adding Vertex (%d,%d)\n",temp.x,temp.y);
-						frontier.push(new Node(temp,n,Maze.Direction.down,n.pathCost+1));
-					}
-				}
-				if(m.canMoveRight(v)){
-					temp = new Vertex(v.x+1,v.y);
-					if(!checkIfInExploredSet(temp)){
-						System.out.printf("Adding Vertex (%d,%d)\n",temp.x,temp.y);
-						frontier.push(new Node(temp,n,Maze.Direction.right,n.pathCost+1));
-					}
-				}
-				if(m.canMoveUp(v)){
-					temp = new Vertex(v.x,v.y+1);
-					if(!checkIfInExploredSet(temp)){
-						System.out.printf("Adding Vertex (%d,%d)\n",temp.x,temp.y);
-						frontier.push(new Node(temp,n,Maze.Direction.up,n.pathCost+1));
-					}
-				}
+				expandNode(n);
 			}
 		}
-		int counter = 0;
-		while(goalNode!=null){
-			solution.add(goalNode.nodeVertex);
-			System.out.printf("x:%d y:%d\n", goalNode.nodeVertex.x,goalNode.nodeVertex.y);
-			goalNode = goalNode.parent;
-			counter++;
+		int stepCounter = 0;
+		//Retrace parent node pointers to find solution once goal is reached
+		Node currentNode = goalNode;
+		while(currentNode!=null){
+			solution.add(currentNode.nodeVertex);
+			System.out.printf("x:%d y:%d\n", currentNode.nodeVertex.x,currentNode.nodeVertex.y);
+			//Update currentNode to parent node pointer
+			currentNode = currentNode.parent;
+			stepCounter++;
 		}
-		System.out.printf("Number of steps %d\n", counter);
+		System.out.printf("Number of steps %d\n", stepCounter);
 	}
 	
-	public Stack<Vertex> getSolution(){
-		return solution;
-	}
-	
-	private boolean checkIfInExploredSet(Vertex v){
-		Iterator<Vertex> iter = exploredSet.iterator();
-		while(iter.hasNext()){
-			if(iter.next().equals(v)){
-				return true;
-			}
-		}
-		return false;
-	}
 }
