@@ -20,7 +20,7 @@ public class CheeseMaze {
 	public int mazeWidth;
 	public int mazeHeight;
 	
-	public Maze(String fileLoc){
+	public CheeseMaze(String fileLoc){
 		ArrayList<String> stringList = generateStringList(fileLoc);
 		if(!stringList.isEmpty())
 			generateMazeArray(stringList);
