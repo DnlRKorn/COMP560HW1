@@ -1,0 +1,13 @@
+package maze;
+
+public class BreadthFirstSearch {
+	Vertex startSpace;
+	
+	
+	public BreadthFirstSearch(Vertex start){
+		startSpace = start;
+	}
+	
+	
+	
+}

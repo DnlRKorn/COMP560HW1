@@ -1,0 +1,16 @@
+package maze;
+
+import maze.Maze.Direction;
+
+public class Node {
+	
+	
+	int pathCost;
+	Vertex nodeVertex; //Vertex which is represented by this node
+	Node parent; //Pointer to parent node
+	
+	public Node(Vertex v, Node p, Direction parentD){
+		
+	}
+	
+}

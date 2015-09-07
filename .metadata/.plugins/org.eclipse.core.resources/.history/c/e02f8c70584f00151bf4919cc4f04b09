@@ -1,0 +1,46 @@
+package maze;
+
+public class Vertex {
+	int x;
+	int y;
+	Maze maze;
+	
+	public Vertex(int x, int y, Maze m){
+		this.x = x;
+		this.y = y;
+		this.maze = m;
+	}
+	
+	public Vertex expandUp(Vertex v){
+		if(maze.canMoveUp(this)){
+			return new Vertex(this.x, this.y - 1, maze);
+		}
+		else
+			return null;
+	}
+	
+	public Vertex expandDown(Vertex v){
+		if(maze.canMoveDown(this)){
+			return new Vertex(this.x, this.y + 1, maze);
+		}
+		else
+			return null;
+	}
+	
+	public Vertex expandLeft(Vertex v){
+		if(maze.canMoveRight(this)){
+			return new Vertex(this.x - 1, this.y, maze);
+		}
+		else
+			return null;
+	}
+	
+	public Vertex expandRight(Vertex v){
+		if(maze.canMoveRight(this)){
+			return new Vertex(this.x + 1, this.y, maze);
+		}
+		else
+			return null;
+	}
+	
+}

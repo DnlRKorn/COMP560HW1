@@ -1,0 +1,17 @@
+package maze;
+
+import java.util.LinkedList;
+
+public class BreadthFirstSearch {
+	Vertex startSpace;
+	LinkedList<Vertex> frontier;
+	LinkedList<Vertex> explored;
+	Maze m;
+	
+	public BreadthFirstSearch(Maze m, Vertex start){
+		startSpace = start;
+		frontier.add(start);
+	}
+
+
+}

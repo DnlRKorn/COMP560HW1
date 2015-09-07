@@ -1,0 +1,41 @@
+package maze;
+
+import java.util.LinkedList;
+import java.util.Stack;
+
+public class DepthFirstSearch extends Search{
+
+	public DepthFirstSearch(Maze m, Vertex start, Vertex goal){
+		solution = new Stack<Vertex>();
+		startSpace = start;
+		goalSpace = goal;
+		//Frontier is stack in Depth-first Search
+		frontier = new Stack<Node>();
+		exploredSet = new LinkedList<Vertex>();
+		((Stack<Node>) frontier).push(new Node(start, null, null, 0));
+		Node goalNode = null;
+		boolean goalFound = false;
+		
+		while(!(frontier.isEmpty()||goalFound)){
+			Node n = ((Stack<Node>) frontier).pop();
+			Vertex v = n.nodeVertex;
+			if(m.isGoalVertex(v)){
+				goalFound = true;
+				goalNode = n;
+			}
+			else{
+				exploredSet.add(v);
+				expandNode(n);
+			}
+		}
+		int counter = 0;
+		while(goalNode!=null){
+			solution.add(goalNode.nodeVertex);
+			System.out.printf("x:%d y:%d\n", goalNode.nodeVertex.x,goalNode.nodeVertex.y);
+			goalNode = goalNode.parent;
+			counter++;
+		}
+		System.out.printf("Number of steps %d\n", counter);
+	}
+	
+}

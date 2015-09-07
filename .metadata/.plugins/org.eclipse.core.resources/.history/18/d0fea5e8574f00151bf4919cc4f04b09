@@ -1,0 +1,14 @@
+package maze;
+
+public class Vertex {
+	int x;
+	int y;
+	Maze maze;
+	
+	public Vertex(int x, int y, Maze maze){
+		this.x = x;
+		this.y = y;
+		this.maze = maze;
+	}
+	
+}

@@ -1,0 +1,8 @@
+package maze;
+
+public class Node {
+	int pathCost;
+	Vertex nodeVertex; //Vertex which is represented by this node
+	Node parent;
+	
+}

@@ -1,0 +1,43 @@
+package maze;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Stack;
+
+import maze.Maze.Direction;
+
+public abstract class Search {
+	Vertex startSpace;
+	Vertex goalSpace;
+	Collection<Node> frontier;
+	LinkedList<Vertex> exploredSet;
+	Maze m;
+	Stack<Vertex> solution;
+	
+	public Stack<Vertex> getSolution(){
+		return solution;
+	}
+	
+	protected void expandFrontier(){
+		
+	}
+	
+	private void expandInDirection(){
+		
+	}
+	
+	protected boolean inExploredSet(Vertex v){
+		Iterator<Vertex> iter = exploredSet.iterator();
+		while(iter.hasNext()){
+			if(iter.next().equals(v)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	protected int manhattanDistance(Vertex v){
+		return Math.abs(v.x-goalSpace.x)+Math.abs(v.y-goalSpace.y);
+	}
+}
