@@ -7,8 +7,9 @@ public class CheeseMaze extends Maze{
 	public LinkedList<Vertex> cheese;
 
 	public CheeseMaze(String fileLoc){
-		super(fileLoc);
-		
+		generateStringList(fileLoc);
+		if(!stringList.isEmpty())
+			generateMazeArray();
 	}
 	
 	public boolean isCheese(Vertex v){

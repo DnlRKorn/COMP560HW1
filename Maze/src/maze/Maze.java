@@ -24,6 +24,10 @@ public class Maze {
 	public String mazeName;
 	ArrayList<String> stringList;
 	
+	public Maze(){
+		
+	}
+	
 	public Maze(String fileLoc){
 		generateStringList(fileLoc);
 		if(!stringList.isEmpty())
@@ -56,7 +60,7 @@ public class Maze {
 	/*
 	 * Reads in maze text file and stores as array of Strings.
 	 */
-	private ArrayList<String> generateStringList(String fileLoc){
+	protected ArrayList<String> generateStringList(String fileLoc){
 		BufferedReader br;
 		stringList = new ArrayList<String>(); 
 		try {
