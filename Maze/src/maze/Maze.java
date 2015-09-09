@@ -29,6 +29,7 @@ public class Maze {
 		if(!stringList.isEmpty())
 			generateMazeArray();
 	}
+	
 	//Checks if the vertex in direction d from vertex v is traversible.
 	public boolean canMoveInDirection(Vertex v, Direction d){
 		if(d == Direction.left){
@@ -73,7 +74,7 @@ public class Maze {
 		return stringList;
 	}
 
-	private void generateMazeArray(){
+	protected void generateMazeArray(){
 		//Identify width of maze based on length of first line
 		mazeWidth = stringList.get(0).length();
 		//Identify height of maze based on length of arrayList
