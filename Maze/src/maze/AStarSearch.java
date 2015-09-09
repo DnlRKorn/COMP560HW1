@@ -6,6 +6,8 @@ import java.util.Stack;
 
 public class AStarSearch extends Search{
 
+	public int lowestPathCost;
+
 	public AStarSearch(Maze m, Vertex start, Vertex goal){
 		//Initialize variables
 		maze = m;
@@ -24,7 +26,7 @@ public class AStarSearch extends Search{
 			Node n = ((PriorityQueue<Node>) frontier).poll();
 			expandedNodes++;
 			Vertex v = n.nodeVertex;
-			if(m.isGoalVertex(v)){
+			if(v.equals(goal)){
 				goalFound = true;
 				goalNode = n;
 			}
@@ -36,6 +38,7 @@ public class AStarSearch extends Search{
 		int stepCounter = 0;
 		//Retrace parent node pointers to find solution once goal is reached
 		Node currentNode = goalNode;
+		lowestPathCost = goalNode.pathCost;
 		while(currentNode!=null){
 			solution.add(currentNode.nodeVertex);
 			System.out.printf("x:%d y:%d\n", currentNode.nodeVertex.x,currentNode.nodeVertex.y);

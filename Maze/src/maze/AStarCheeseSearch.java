@@ -1,4 +1,4 @@
-package maze.cheese;
+package maze;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -20,17 +20,23 @@ public class AStarCheeseSearch {
 	public AStarCheeseSearch(CheeseMaze c){
 		this.c = c;
 		frontier = new PriorityQueue<CheeseNode>(10 , new CheeseNodeComparator());
-		CheeseNode startNode = new CheeseNode(c.start,(LinkedList<Vertex>) c.cheese.clone(),0,0);
+		CheeseNode startNode = new CheeseNode(c.start,(LinkedList<Vertex>) c.cheese.clone(),0,0,null);
 		addCheeseToFrontier(startNode);
 		while(!frontier.isEmpty()){
 			CheeseNode n = frontier.poll();
 			if(n.cheeseList.size()==0){
-				n = goalNode;
+				goalNode = n;
 				break;
 			}
 			else{
 				addCheeseToFrontier(n);
 			}
+		}
+		
+		System.out.println("Stuff");
+		while(goalNode!=null){
+			System.out.printf("%d, %d\n",goalNode.v.x,goalNode.v.y);
+			goalNode = goalNode.parent;
 		}
 	}
 	
@@ -42,10 +48,11 @@ public class AStarCheeseSearch {
 			LinkedList<Vertex> modifiedCheeseList = (LinkedList<Vertex>) n.cheeseList.clone();
 
 			modifiedCheeseList.remove(nextCheese);
+			Vertex v = n.v;
 			if(nextCheese!=null){
 				AStarSearch aStar = new AStarSearch(c, n.v, nextCheese);
 				int pathCost = aStar.lowestPathCost;
-				frontier.add(new CheeseNode(nextCheese,modifiedCheeseList,pathCost,previous));
+				frontier.add(new CheeseNode(nextCheese,modifiedCheeseList,pathCost,previous,n));
 			}
 		}
 	}
@@ -57,16 +64,18 @@ class CheeseNode{
 	LinkedList<Vertex> cheeseList;
 	int pathCost;
 	int previousPathCost;
+	CheeseNode parent;
 	
-	CheeseNode(Vertex v, LinkedList<Vertex> cheeseList, int previousPathCost, int pathCost){
+	CheeseNode(Vertex v, LinkedList<Vertex> cheeseList, int previousPathCost, int pathCost, CheeseNode parent){
 		this.v = v;
 		this.cheeseList = cheeseList;
 		this.pathCost = pathCost;
 		this.previousPathCost = previousPathCost;
+		this.parent = parent;
 	}
 	
 	int heurisitic(){
-		return pathCost + previousPathCost + cheeseList.size();
+		return pathCost + previousPathCost + cheeseList.size() - 1;
 	}
 }
 
