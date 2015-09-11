@@ -1,0 +1,17 @@
+package cheese;
+
+import java.util.Comparator;
+
+public class CheeseNodeComparator implements Comparator<CheeseNode> {
+
+	public int compare(CheeseNode a, CheeseNode b) {
+		if(a.heurisitic() < b.heurisitic()){
+			return -1;
+		}
+		else if(a.heurisitic() == b.heurisitic()){
+			return 0;
+		}
+		return 1;
+	}
+
+}

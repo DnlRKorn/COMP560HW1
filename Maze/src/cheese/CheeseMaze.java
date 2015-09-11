@@ -1,6 +1,9 @@
-package maze;
+package cheese;
 
 import java.util.LinkedList;
+
+import maze.Maze;
+import maze.Vertex;
 
 public class CheeseMaze extends Maze{
 

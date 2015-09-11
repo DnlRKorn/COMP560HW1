@@ -22,7 +22,7 @@ public class Maze {
 	public int mazeWidth;
 	public int mazeHeight;
 	public String mazeName;
-	ArrayList<String> stringList;
+	protected ArrayList<String> stringList;
 	
 	public Maze(){
 		

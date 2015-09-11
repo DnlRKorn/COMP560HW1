@@ -1,4 +1,4 @@
-package maze;
+package cheese;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -7,7 +7,6 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 import maze.AStarSearch;
-import maze.CheeseMaze;
 import maze.Vertex;
 
 
@@ -59,36 +58,3 @@ public class AStarCheeseSearch {
 	
 }
 
-class CheeseNode{
-	Vertex v;
-	LinkedList<Vertex> cheeseList;
-	int pathCost;
-	int previousPathCost;
-	CheeseNode parent;
-	
-	CheeseNode(Vertex v, LinkedList<Vertex> cheeseList, int previousPathCost, int pathCost, CheeseNode parent){
-		this.v = v;
-		this.cheeseList = cheeseList;
-		this.pathCost = pathCost;
-		this.previousPathCost = previousPathCost;
-		this.parent = parent;
-	}
-	
-	int heurisitic(){
-		return pathCost + previousPathCost + cheeseList.size() - 1;
-	}
-}
-
-class CheeseNodeComparator implements Comparator<CheeseNode> {
-
-	public int compare(CheeseNode a, CheeseNode b) {
-		if(a.heurisitic() < b.heurisitic()){
-			return -1;
-		}
-		else if(a.heurisitic() == b.heurisitic()){
-			return 0;
-		}
-		return 1;
-	}
-
-}
