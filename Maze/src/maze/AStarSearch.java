@@ -41,13 +41,13 @@ public class AStarSearch extends Search{
 		lowestPathCost = goalNode.pathCost;
 		while(currentNode!=null){
 			solution.add(currentNode.nodeVertex);
-			System.out.printf("x:%d y:%d\n", currentNode.nodeVertex.x,currentNode.nodeVertex.y);
+//		System.out.printf("x:%d y:%d\n", currentNode.nodeVertex.x,currentNode.nodeVertex.y);
 			//Update currentNode to parent node pointer
 			currentNode = currentNode.parent;
 			stepCounter++;
 		}
-		System.out.printf("Number of steps %d\n", stepCounter);
-		System.out.printf("Number of nodes expanded %d\n", expandedNodes);
+//		System.out.printf("Number of steps %d\n", stepCounter);
+//		System.out.printf("Number of nodes expanded %d\n", expandedNodes);
 		
 	}
 
