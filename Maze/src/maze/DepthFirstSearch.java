@@ -17,9 +17,11 @@ public class DepthFirstSearch extends Search{
 		((Stack<Node>) frontier).push(new Node(start, null, null, 0));
 		Node goalNode = null;
 		boolean goalFound = false;
+		int expandedNodes = 0;
 		//Process nodes in the frontier
 		while(!(frontier.isEmpty()||goalFound)){
 			Node n = ((Stack<Node>) frontier).pop();
+			expandedNodes++;
 			Vertex v = n.nodeVertex;
 			if(m.isGoalVertex(v)){
 				goalFound = true;
@@ -41,6 +43,8 @@ public class DepthFirstSearch extends Search{
 			stepCounter++;
 		}
 		System.out.printf("Number of steps %d\n", stepCounter);
+		System.out.printf("Number of nodes expanded %d\n", expandedNodes);
+
 	}
 	
 }

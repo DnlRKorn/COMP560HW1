@@ -19,15 +19,16 @@ public class MainRunner {
 		Search search;
 		Maze m;
 		String algorithm = args[0];
-		if(algorithm.equalsIgnoreCase("cheese")){
-			m = new CheeseMaze(args[1]);
-			System.out.println("Start x = " + m.start.x);
-			System.out.println("Start y = " + m.start.y);
-			System.out.println("Goal x = " + m.goal.x);
-			System.out.println("Goal y = " + m.goal.y);
-			search = new AStarCheeseSearch(m, m.start, m.goal);
-		}
-		else{
+//		if(algorithm.equalsIgnoreCase("cheese")){
+//			m = new CheeseMaze(args[1]);
+//			System.out.println("Start x = " + m.start.x);
+//			System.out.println("Start y = " + m.start.y);
+//			System.out.println("Goal x = " + m.goal.x);
+//			System.out.println("Goal y = " + m.goal.y);
+//			search = new AStarCheeseSearch(m, m.start, m.goal);
+//		}
+//		else{
+		System.out.println(args[0]);
 			m = new Maze(args[1]);
 			System.out.println("Start x = " + m.start.x);
 			System.out.println("Start y = " + m.start.y);
@@ -45,7 +46,7 @@ public class MainRunner {
 			else{
 				search = new AStarSearch(m, m.start, m.goal);
 			}
-		}
+//		}
 			
 		m.processSolution(search.getSolution());
 	}

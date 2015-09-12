@@ -9,17 +9,19 @@ public class CheeseNode{
 	LinkedList<Vertex> cheeseList;
 	int pathCost;
 	int previousPathCost;
+	int listSize;
 	CheeseNode parent;
 	
-	CheeseNode(Vertex v, LinkedList<Vertex> cheeseList, int previousPathCost, int pathCost, CheeseNode parent){
+	CheeseNode(Vertex v, LinkedList<Vertex> cheeseList, int previousPathCost, int pathCost, int listSize, CheeseNode parent){
 		this.v = v;
 		this.cheeseList = cheeseList;
 		this.pathCost = pathCost;
 		this.previousPathCost = previousPathCost;
+		this.listSize = listSize;
 		this.parent = parent;
 	}
 	
 	int heurisitic(){
-		return pathCost + previousPathCost + cheeseList.size() - 1;
+		return pathCost + previousPathCost + listSize - 1;
 	}
 }
