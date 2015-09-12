@@ -109,4 +109,13 @@ class CheeseNodeComparator implements Comparator<CheeseNode> {
 
 }
 
+class CheeseNode2{
+	Vertex v;
+	int[] distances;
+	
+	public CheeseNode2(Vertex v, int[] distances){
+		this.v = v;
+		this.distances = distances;
+	}
+	
 }
