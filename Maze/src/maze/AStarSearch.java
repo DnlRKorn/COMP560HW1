@@ -16,7 +16,7 @@ public class AStarSearch extends Search{
 		goalSpace = goal;
 		//Frontier is priority queue in A* Search
 		frontier = new PriorityQueue<Node>(10 , new AStarNodeComparator());
-		frontier.add(new Node(start, null, null, 0, manhattanDistance(start)));
+		frontier.add(new Node(start, null, null, 0, manhattanDistance(start, goalSpace)));
 		exploredSet = new LinkedList<Vertex>();
 		Node goalNode = null;
 		boolean goalFound = false;

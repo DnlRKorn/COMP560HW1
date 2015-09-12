@@ -14,7 +14,7 @@ public class GreedyBestFirstSearch extends Search {
 		goalSpace = goal;
 		//Frontier is priority queue in Greedy Best-first Search
 		frontier = new PriorityQueue<Node>(10,new GreedyNodeComparator());
-		frontier.add(new Node(start, null, null, 0, manhattanDistance(start)));
+		frontier.add(new Node(start, null, null, 0, manhattanDistance(startSpace, goalSpace)));
 		exploredSet = new LinkedList<Vertex>();
 		Node goalNode = null;
 		boolean goalFound = false;

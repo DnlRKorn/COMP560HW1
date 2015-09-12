@@ -55,9 +55,9 @@ public abstract class Search {
 				//Different methods for adding to frontier based 
 				//on what data structure the frontier is.
 				if(frontier instanceof Queue)
-					frontier.add(new Node(temp,n,d,n.pathCost+1,manhattanDistance(temp)));
+					frontier.add(new Node(temp,n,d,n.pathCost+1,manhattanDistance(temp, goalSpace)));
 				else
-					((Stack<Node>)frontier).push(new Node(temp,n,d,n.pathCost+1,manhattanDistance(temp)));
+					((Stack<Node>)frontier).push(new Node(temp,n,d,n.pathCost+1,manhattanDistance(temp, goalSpace)));
 			}
 		}
 	}
@@ -74,7 +74,7 @@ public abstract class Search {
 	}
 	
 	//Returns the Manhattan Distance from vertex v to the goal space
-	protected int manhattanDistance(Vertex v){
-		return Math.abs(v.x-goalSpace.x)+Math.abs(v.y-goalSpace.y);
+	protected int manhattanDistance(Vertex v1, Vertex v2){
+		return Math.abs(v1.x-v2.x)+Math.abs(v1.y-v2.y);
 	}
 }
