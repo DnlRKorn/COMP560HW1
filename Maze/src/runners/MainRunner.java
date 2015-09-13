@@ -7,6 +7,7 @@ import maze.GreedyBestFirstSearch;
 import maze.Maze;
 import maze.Search;
 import cheese.AStarSearchForCheese;
+import cheese.BruteForceAStarCheeseSearch;
 import cheese.CheeseMaze;
 
 public class MainRunner {
@@ -27,7 +28,14 @@ public class MainRunner {
 			System.out.println("Start x = " + m.start.x);
 			System.out.println("Start y = " + m.start.y);
 			search = new AStarSearchForCheese((CheeseMaze) m, m.start, ((CheeseMaze)m).cheese);
-		} else {
+		}
+		else if(algorithm.equalsIgnoreCase("bruteforcecheese")){
+			m = new CheeseMaze(args[1]);
+			System.out.println("Start x = " + m.start.x);
+			System.out.println("Start y = " + m.start.y);
+			BruteForceAStarCheeseSearch brute = new BruteForceAStarCheeseSearch((CheeseMaze) m);
+		}
+		else {
 			System.out.println(args[0]);
 			m = new Maze(args[1]);
 			System.out.println("Start x = " + m.start.x);
