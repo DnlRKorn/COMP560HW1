@@ -9,9 +9,9 @@ import maze.Node;
 import maze.Search;
 import maze.Vertex;
 
-public class EfficenterAStar extends Search{
+public class EfficentAStar extends Search{
 	
-	public EfficenterAStar(Maze m){
+	public EfficentAStar(Maze m){
 		//Initialize variables
 		maze = m;
 	}

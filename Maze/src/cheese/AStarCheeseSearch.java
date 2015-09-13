@@ -13,10 +13,10 @@ public class AStarCheeseSearch {
 	Queue<CheeseNode> frontier;
 	CheeseMaze c;
 	CheeseNode goalNode;
-	EfficenterAStar aStar;
+	EfficentAStar aStar;
 	
 	public AStarCheeseSearch(CheeseMaze c){
-		aStar = new EfficenterAStar(c);
+		aStar = new EfficentAStar(c);
 		this.c = c;
 		frontier = new PriorityQueue<CheeseNode>(10 , new CheeseNodeComparator());
 		CheeseNode startNode = new CheeseNode(c.start,(LinkedList<Vertex>) c.cheese.clone(),0,0,c.cheese.size(),null);
