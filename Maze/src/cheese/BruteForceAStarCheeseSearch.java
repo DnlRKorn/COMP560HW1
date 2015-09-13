@@ -1,5 +1,7 @@
 package cheese;
 
+import java.util.Stack;
+
 import maze.Vertex;
 
 
@@ -11,6 +13,7 @@ public class BruteForceAStarCheeseSearch {
 	CheeseNode goalNode;
 	EfficentAStar aStar;
 	BruteForceCheeseNode[] cheeseNodeArray;
+	Stack<Vertex> solutionStack;
 	int curMinScore;
 	int[] minPermuation;
 	
@@ -34,8 +37,10 @@ public class BruteForceAStarCheeseSearch {
 			arrayOfInt[i] = i;//Builds an array of integers from  0 to n-1 for the number of cheese nodes in the index
 		}
 		permute(arrayOfInt,0,arrayOfInt.length-1);
+		solutionStack = new Stack<Vertex>();
 		for(int i = 0;i<cheeseNodeArray.length;i++){
-			System.out.printf("x: %d y: %d\n", cheeseNodeArray[minPermuation[i]].v.x, cheeseNodeArray[minPermuation[i]].v.y);
+			//System.out.printf("x: %d y: %d\n", cheeseNodeArray[minPermuation[i]].v.x, cheeseNodeArray[minPermuation[i]].v.y);
+			solutionStack.push(cheeseNodeArray[minPermuation[i]].v);
 		}
 	}
 
