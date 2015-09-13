@@ -1,0 +1,25 @@
+package maze;
+
+import java.util.LinkedList;
+
+import maze.Vertex;
+
+public class CheeseNode{
+	Vertex v;
+	LinkedList<Vertex> cheeseList;
+	int pathCost;
+	int previousPathCost;
+	CheeseNode parent;
+	
+	CheeseNode(Vertex v, LinkedList<Vertex> cheeseList, int previousPathCost, int pathCost, CheeseNode parent){
+		this.v = v;
+		this.cheeseList = cheeseList;
+		this.pathCost = pathCost;
+		this.previousPathCost = previousPathCost;
+		this.parent = parent;
+	}
+	
+	int heurisitic(){
+		return pathCost + previousPathCost + cheeseList.size() - 1;
+	}
+}

@@ -1,7 +1,10 @@
 package maze;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -111,7 +114,7 @@ public class Maze {
 	 * Goes through solution path and 
 	 * changes spaces traversed to '.'
 	 */
-	public void processSolution(Stack<Vertex> solution){ 
+	public void processSolution(Stack<Vertex> solution, String filename){ 
 		while(!solution.isEmpty()){
 			Vertex currentVertex = solution.pop();
 			int currentX = currentVertex.x;
@@ -126,9 +129,20 @@ public class Maze {
 				stringList.set(currentY, solutionString.toString());
 			}
 		}
-		for(int i = 0; i < stringList.size(); i++){
-			System.out.println(stringList.get(i));
+		
+		try {
+			PrintWriter writer = new PrintWriter(filename + "Solution.txt", "UTF-8");
+			for(int i = 0; i < stringList.size(); i++){
+				writer.println(stringList.get(i));
+			}
+			writer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+//
+//		for(int i = 0; i < stringList.size(); i++){
+//			System.out.println(stringList.get(i));
+//		}
 	}
 
 	

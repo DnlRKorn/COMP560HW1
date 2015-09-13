@@ -13,12 +13,12 @@ import maze.Maze.Direction;
  *
  */
 public abstract class Search {
-	Vertex startSpace;
-	Vertex goalSpace;
-	Collection<Node> frontier;
-	LinkedList<Vertex> exploredSet;
-	Maze maze;
-	Stack<Vertex> solution;
+	protected Vertex startSpace;
+	protected Vertex goalSpace;
+	protected Collection<Node> frontier;
+	protected LinkedList<Vertex> exploredSet;
+	protected Maze maze;
+	protected Stack<Vertex> solution;
 	
 	public Stack<Vertex> getSolution(){
 		return solution;

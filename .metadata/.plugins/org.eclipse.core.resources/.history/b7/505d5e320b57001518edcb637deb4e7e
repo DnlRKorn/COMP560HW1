@@ -1,0 +1,27 @@
+package maze;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.LinkedList;
+
+public class CheeseMaze extends Maze{
+
+	private boolean[][] mazeArray;
+
+	public enum Direction{
+		up, down, left, right
+	}
+	
+	public Vertex goal;
+	public Vertex start;
+	public LinkedList<Vertex> cheese;
+
+	public int mazeWidth;
+	public int mazeHeight;
+	
+	public CheeseMaze(String fileLoc){
+		super(fileLoc);
+	}
+	
+}

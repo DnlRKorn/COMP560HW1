@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-import maze.AStarSearch;
+import maze.EfficenterAStar;
 import maze.Vertex;
 
 
@@ -14,8 +14,10 @@ public class AStarCheeseSearch {
 	Queue<CheeseNode> frontier;
 	CheeseMaze c;
 	CheeseNode goalNode;
+	EfficenterAStar aStar;
 	
 	public AStarCheeseSearch(CheeseMaze c){
+		aStar = new EfficenterAStar(c);
 		this.c = c;
 		frontier = new PriorityQueue<CheeseNode>(10 , new CheeseNodeComparator());
 		CheeseNode startNode = new CheeseNode(c.start,(LinkedList<Vertex>) c.cheese.clone(),0,0,c.cheese.size(),null);
@@ -37,39 +39,44 @@ public class AStarCheeseSearch {
 			goalNode = goalNode.parent;
 		}
 	}
-	
+
 	private void addCheeseToFrontier(CheeseNode n){
 		Iterator<Vertex> iter = n.cheeseList.iterator();
 		int previous = n.pathCost + n.previousPathCost;
 		System.out.println(n.cheeseList.size());
 		//CheeseNode[] arrayToSort = new CheeseNode[n.listSize];
-		int i = 0;
 		while(iter.hasNext()){
 			Vertex nextCheese = iter.next();
 			LinkedList<Vertex> modifiedCheeseList = (LinkedList<Vertex>) n.cheeseList.clone();
 
 			modifiedCheeseList.remove(nextCheese);
-			Vertex v = n.v;
-			AStarSearch aStar = new AStarSearch(c, n.v, nextCheese);
-			int pathCost = aStar.lowestPathCost;
+			//AStarSearch aStar = new AStarSearch(c, n.v, nextCheese);
+			int pathCost = aStar.RunAStarSearch(n.v,nextCheese);
 			frontier.add((new CheeseNode(nextCheese,modifiedCheeseList,pathCost,previous,n.listSize-1,n)));
-			//	arrayToSort[i] = (new CheeseNode(nextCheese,modifiedCheeseList,pathCost,previous,n.listSize-1,n));
-			//	i++;
-		}
-/*		Arrays.sort(arrayToSort,new CheeseNodeComparator());
-		switch(arrayToSort.length){
-		default:
-			frontier.add(arrayToSort[3]);
-		case 3:
-			frontier.add(arrayToSort[2]);
-		case 2:
-			frontier.add(arrayToSort[1]);
-		case 1:
-			frontier.add(arrayToSort[0]);
-		case 0:
-		}*/
 
 		
+	}
+		
+//	private void calculateArrayValue(int[] B){
+//		int score = aStar.RunAStarSearch(startNode, CheeseArray[B[0]]);
+//		for(int i = 0; i<Size-1;i++){
+//			score += aStar.RunAStarSearch(CheeseArray[B[i]], CheeseArray[B[i+1]]);
+//		}
+//		if(score<curMinScore){
+//			minPermuation = B;
+//			curMinScore = score;
+//		}
+	}
+	
+}
+
+class CheeseNode2{
+	Vertex v;
+	int[] distances;
+	
+	public CheeseNode2(Vertex v, int[] distances){
+		this.v = v;
+		this.distances = distances;
 	}
 	
 }

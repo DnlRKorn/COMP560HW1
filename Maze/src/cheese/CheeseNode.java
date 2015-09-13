@@ -22,6 +22,6 @@ public class CheeseNode{
 	}
 	
 	int heurisitic(){
-		return pathCost + previousPathCost + listSize - 1;
+		return (int) (pathCost + previousPathCost + listSize * 2 - 1);
 	}
 }

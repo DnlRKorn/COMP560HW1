@@ -1,0 +1,25 @@
+package runners;
+
+import maze.AStarSearch;
+import maze.Maze;
+import maze.Search;
+
+public class MainRunner {
+	Search search;
+	/**
+	 * 
+	 * @param args Enter name of maze file in command line arguments
+	 */
+	public static void main(String[] args) {
+		String algorithm = args[0];
+		if(algorithm.equalsIgnoreCase("cheese")){
+			Maze m = new Maze(args[1]);
+			System.out.println("Start x = " + m.start.x);
+			System.out.println("Start y = " + m.start.y);
+			System.out.println("Goal x = " + m.goal.x);
+			System.out.println("Goal y = " + m.goal.y);
+			AStarSearch aStar = new AStarSearch(m, m.start, m.goal);
+		}
+		m.processSolution(aStar.getSolution());
+	}
+}

@@ -1,6 +1,7 @@
 package cheese;
 
 import java.util.LinkedList;
+import java.util.Stack;
 
 import maze.Maze;
 import maze.Vertex;
@@ -51,5 +52,9 @@ public class CheeseMaze extends Maze{
 				}
 			}
 		}
+	}
+	@Override
+	public void processSolution(Stack<Vertex> solution, String filename){
+		
 	}
 }

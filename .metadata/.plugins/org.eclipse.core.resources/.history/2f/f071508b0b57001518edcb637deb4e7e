@@ -1,0 +1,14 @@
+package maze;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.LinkedList;
+
+public class CheeseMaze extends Maze{
+	
+	public CheeseMaze(String fileLoc){
+		super(fileLoc);
+	}
+	
+}
