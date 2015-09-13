@@ -1,7 +1,6 @@
-package maze;
+package cheese;
 
-import cheese.CheeseMaze;
-import cheese.CheeseNode;
+import maze.Vertex;
 
 
 

@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-import maze.EfficenterAStar;
 import maze.Vertex;
 
 
@@ -56,28 +55,18 @@ public class AStarCheeseSearch {
 
 		
 	}
-		
-//	private void calculateArrayValue(int[] B){
-//		int score = aStar.RunAStarSearch(startNode, CheeseArray[B[0]]);
-//		for(int i = 0; i<Size-1;i++){
-//			score += aStar.RunAStarSearch(CheeseArray[B[i]], CheeseArray[B[i+1]]);
-//		}
-//		if(score<curMinScore){
-//			minPermuation = B;
-//			curMinScore = score;
-//		}
 	}
 	
 }
 
-class CheeseNode2{
-	Vertex v;
-	int[] distances;
-	
-	public CheeseNode2(Vertex v, int[] distances){
-		this.v = v;
-		this.distances = distances;
-	}
-	
-}
+//class CheeseNode2{
+//	Vertex v;
+//	int[] distances;
+//	
+//	public CheeseNode2(Vertex v, int[] distances){
+//		this.v = v;
+//		this.distances = distances;
+//	}
+//	
+//}
 

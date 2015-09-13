@@ -139,10 +139,6 @@ public class Maze {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//
-//		for(int i = 0; i < stringList.size(); i++){
-//			System.out.println(stringList.get(i));
-//		}
 	}
 
 	

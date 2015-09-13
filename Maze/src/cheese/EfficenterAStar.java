@@ -1,7 +1,13 @@
-package maze;
+package cheese;
 
 import java.util.LinkedList;
 import java.util.PriorityQueue;
+
+import maze.AStarNodeComparator;
+import maze.Maze;
+import maze.Node;
+import maze.Search;
+import maze.Vertex;
 
 public class EfficenterAStar extends Search{
 	

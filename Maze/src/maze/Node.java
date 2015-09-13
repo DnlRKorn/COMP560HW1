@@ -5,7 +5,7 @@ import maze.Maze.Direction;
 public class Node {
 	
 	static Maze maze;
-	int pathCost;
+	public int pathCost;
 	int manhattanDistance;
 	public Vertex nodeVertex; //Vertex which is represented by this node
 	public Node parent; //Pointer to parent node
