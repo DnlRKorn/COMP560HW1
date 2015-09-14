@@ -37,8 +37,9 @@ public class AStarCheeseSearch {
 			}
 		}
 		
+		solutionStack = new Stack<Vertex>();
 		while(goalNode!=null){
-			System.out.printf("%d, %d\n",goalNode.v.x,goalNode.v.y);
+			solutionStack.push(goalNode.v);
 			goalNode = goalNode.parent;
 		}
 	}
